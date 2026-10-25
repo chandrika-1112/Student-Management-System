@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudentHub | Student Management System</title>
+
+    <!-- Connect CSS file -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h2>StudentHub</h2>
+                <p>Management Portal</p>
+            </div>
+        </div>
+
+        <p class="nav-label">MAIN MENU</p>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active">▦ Dashboard</a>
+            <a href="#studentFormSection" class="nav-link">＋ Add Student</a>
+            <a href="#studentsSection" class="nav-link">▤ Student Records</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-avatar">🎓</div>
+            <div>
+                <strong>Admin Panel</strong>
+                <p>Student Administration</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">OVERVIEW</p>
+                <h1>Student Dashboard</h1>
+                <p class="subtitle">Welcome! Manage your student records in one place.</p>
+            </div>
+
+            <button id="themeToggle" class="outline-btn" type="button">
+                🌙 Dark Mode
+            </button>
+        </header>
+
+        <section id="dashboard" class="stats-grid">
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Total Students</span>
+                    <span class="stat-icon blue">♙</span>
+                </div>
+                <h2 id="totalStudents">0</h2>
+                <p class="stat-note">Registered students</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Total Courses</span>
+                    <span class="stat-icon purple">▤</span>
+                </div>
+                <h2 id="totalCourses">0</h2>
+                <p class="stat-note">Courses represented</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>First Year</span>
+                    <span class="stat-icon green">①</span>
+                </div>
+                <h2 id="firstYearStudents">0</h2>
+                <p class="stat-note">First-year students</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Second Year</span>
+                    <span class="stat-icon orange">②</span>
+                </div>
+                <h2 id="secondYearStudents">0</h2>
+                <p class="stat-note">Second-year students</p>
+            </article>
+
+        </section>
+
+        <section id="studentFormSection" class="panel">
+
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">STUDENT MANAGEMENT</p>
+                    <h2 id="formTitle">Add New Student</h2>
+                    <p class="subtitle">Enter the details below to register a student.</p>
+                </div>
+                <span class="heading-icon">＋</span>
+            </div>
+
+            <form id="studentForm">
+
+                <input type="hidden" id="editId">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="studentId">Student ID *</label>
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="e.g. STU101"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentName">Full Name *</label>
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Enter full name"
+                            minlength="2"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentEmail">Email Address *</label>
+                        <input
+                            type="email"
+                            id="studentEmail"
+                            placeholder="student@example.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentPhone">Phone Number *</label>
+                        <input
+                            type="tel"
+                            id="studentPhone"
+                            placeholder="10-digit phone number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentCourse">Course *</label>
+                        <select id="studentCourse" required>
+                            <option value="">Select course</option>
+                            <option value="B.Tech">B.Tech</option>
+                            <option value="B.Sc">B.Sc</option>
+                            <option value="B.Com">B.Com</option>
+                            <option value="BCA">BCA</option>
+                            <option value="MCA">MCA</option>
+                            <option value="MBA">MBA</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentYear">Academic Year *</label>
+                        <select id="studentYear" required>
+                            <option value="">Select year</option>
+                            <option value="1">First Year</option>
+                            <option value="2">Second Year</option>
+                            <option value="3">Third Year</option>
+                            <option value="4">Fourth Year</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submitBtn" class="primary-btn">
+                        + Add Student
+                    </button>
+
+                    <button type="button" id="cancelEdit" class="outline-btn hidden">
+                        Cancel
+                    </button>
+                </div>
+
+                <p id="formMessage" role="status" aria-live="polite"></p>
+
+            </form>
+        </section>
+
+        <section id="studentsSection" class="panel">
+
+            <div class="panel-heading records-heading">
+                <div>
+                    <p class="eyebrow">DATABASE OVERVIEW</p>
+                    <h2>Student Records</h2>
+                    <p class="subtitle">Search, filter, edit or remove student records.</p>
+                </div>
+
+                <button id="exportBtn" class="outline-btn" type="button">
+                    ↓ Export CSV
+                </button>
+            </div>
+
+            <div class="filters">
+                <div class="search-box">
+                    <span>⌕</span>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search by name or student ID..."
+                        aria-label="Search students"
+                    >
+                </div>
+
+                <select id="courseFilter" aria-label="Filter by course">
+                    <option value="">All Courses</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="BCA">BCA</option>
+                    <option value="MCA">MCA</option>
+                    <option value="MBA">MBA</option>
+                </select>
+
+                <select id="yearFilter" aria-label="Filter by academic year">
+                    <option value="">All Years</option>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Fourth Year</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STUDENT ID</th>
+                            <th>STUDENT NAME</th>
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>COURSE</th>
+                            <th>YEAR</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentTableBody"></tbody>
+                </table>
+            </div>
+
+            <div id="emptyMessage" class="empty-state">
+                <div class="empty-icon">▤</div>
+                <h3>No student records yet</h3>
+                <p>Add a student using the form above to get started.</p>
+            </div>
+
+        </section>
+
+        <footer>
+            <p>© 2026 StudentHub · Student Management System</p>
+            <p>Built with HTML, CSS & JavaScript</p>
+        </footer>
+
+    </main>
+
+    <!-- Connect JavaScript file -->
+    <script src="./script.js" defer></script>
+
+</body>
+</html>
